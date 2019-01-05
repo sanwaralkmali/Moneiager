@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Moneiager</string>
+    <string name="title_activity_on_start">OnStartActivity</string>
 </resources>
