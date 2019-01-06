@@ -10,44 +10,58 @@ import android.widget.CalendarView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class History extends AppCompatActivity {
     DataBaseHelper db;
     CalendarView calendarView;
-    List<historyModel> list = new ArrayList<>();
+    static List<historyModel> list = new ArrayList<>();
     MyCustomerAdaptor myCustomerAdaptor;
+    public static String date;
+    ListView lvList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_history);
         db = new DataBaseHelper(this);
-
         calendarView = (CalendarView) findViewById(R.id.calendarView);
-        calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
-            @Override
-            public void onSelectedDayChange(CalendarView view, int year, int month, int dayOfMonth) {
-                Toast.makeText(getApplicationContext(),year+"/"+(month+1)+"/"+dayOfMonth,Toast.LENGTH_SHORT).show();
-                try {
-                    list = db.getAllNotes(year+"/"+(month+1)+"/"+dayOfMonth);
-                }catch (NullPointerException e){
-
-                }
-            }
-        });
-
+        date = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
         try {
-            list = db.getAllNotes();
+            list = db.getAllNotes(date);
         }catch (NullPointerException e){
 
         }
-        ListView lvList = (ListView) findViewById(R.id.historyList);
 
+        lvList = (ListView) findViewById(R.id.historyList);
         myCustomerAdaptor = new MyCustomerAdaptor();
-
         lvList.setAdapter(myCustomerAdaptor);
+
+        calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
+            @Override
+            public void onSelectedDayChange(CalendarView view, int year, int month, int dayOfMonth) {
+                if(month<9 && dayOfMonth <9)
+                    date=year+"-0"+(month+1)+"-0"+dayOfMonth;
+                else if(month<9)
+                    date=year+"-0"+(month+1)+"-"+dayOfMonth;
+                else if(dayOfMonth<9)
+                    date=year+"-"+(month+1)+"-0"+dayOfMonth;
+                else
+                    date=year+"-"+(month+1)+"-"+dayOfMonth;
+
+
+                list = db.getAllNotes(date);
+                lvList = (ListView) findViewById(R.id.historyList);
+                myCustomerAdaptor = new MyCustomerAdaptor();
+                lvList.setAdapter(myCustomerAdaptor);
+
+            }
+        });
+
 
     }
 

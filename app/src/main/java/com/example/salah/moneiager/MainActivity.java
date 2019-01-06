@@ -30,14 +30,15 @@ public class MainActivity extends AppCompatActivity {
             startActivity(i);
 
         } else {
+
             tx1 = (TextView) findViewById(R.id.IncomeValue);
-            tx1.setText(l.get(0).getUserIncome() + "TL      100%");
+            tx1.setText(l.get(0).getUserIncome() + "TL  100%");
 
             tx2 = (TextView) findViewById(R.id.UsedValue);
-            tx2.setText(db.getSumPrice() + " TL       " + (100 * db.getSumPrice()) / l.get(0).getUserIncome() + "%");
+            tx2.setText("    "+db.getSumPrice() + "TL  " + (100 * db.getSumPrice()) / l.get(0).getUserIncome() + "%");
 
             tx3 = (TextView) findViewById(R.id.AvaliableValue);
-            tx3.setText(l.get(0).getUserIncome() - db.getSumPrice() + "TL     " + (100 - ((100 * db.getSumPrice()) / l.get(0).getUserIncome())) + "%");
+            tx3.setText(l.get(0).getUserIncome() - db.getSumPrice() + "TL  " + (100 - ((100 * db.getSumPrice()) / l.get(0).getUserIncome())) + "%");
 
             faBu = (FloatingActionButton) findViewById(R.id.floatingActionButton);
             faBu.setOnClickListener(new View.OnClickListener() {
@@ -62,9 +63,9 @@ public class MainActivity extends AppCompatActivity {
                             db.addItem(description.getText().toString(), Integer.parseInt(price.getText().toString()));
 
                             List<historyModel> list = db.getAllNotes();
+                            finish();
+                            startActivity(MainActivity.this.getIntent());
 
-                            Intent i = new Intent(MainActivity.this, MainActivity.class);
-                            startActivity(i);
                         }
                     });
 
@@ -79,16 +80,15 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-
     public void gotoHistory(View view) {
         Intent i = new Intent(this,History.class);
         startActivity(i);
-        Toast.makeText(this,"History Clicked",Toast.LENGTH_SHORT).show();
 
             }
 
 
             public void clearHistory(View view){
-            db.deleteAll();
+                Intent i = new Intent(MainActivity.this, AllHestory.class);
+                startActivity(i);
             }
 }

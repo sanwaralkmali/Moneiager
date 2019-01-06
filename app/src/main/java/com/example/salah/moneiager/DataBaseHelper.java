@@ -6,9 +6,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class DataBaseHelper extends SQLiteOpenHelper {
@@ -67,7 +65,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
         // Select All Query
         String selectQuery = "SELECT  * FROM " + historyModel.TABLE_NAME +" WHERE "+ historyModel.COLUMN_TIMESTAMP +
-        " ='"+date+"' ORDER BY " +
+        "='"+date+"' ORDER BY " +
                 historyModel.COLUMN_TIMESTAMP + " DESC";
 
         SQLiteDatabase db = this.getWritableDatabase();
@@ -185,4 +183,8 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         return 0;
     }
 
+    public void deleteUser() {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.execSQL("delete from " + UserInfo.TABLE_NAME);
+    }
 }

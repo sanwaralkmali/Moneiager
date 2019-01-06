@@ -18,7 +18,8 @@
         </activity>
         <activity android:name=".History" />
         <activity android:name=".OnCreateActivity" />
-        <activity android:name=".ContinueActivity"></activity>
+        <activity android:name=".ContinueActivity" />
+        <activity android:name=".AllHestory"></activity>
     </application>
 
 </manifest>
