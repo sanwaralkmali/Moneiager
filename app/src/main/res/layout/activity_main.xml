@@ -211,7 +211,8 @@
             android:layout_height="wrap_content"
             android:layout_margin="0dp"
             android:layout_weight="0"
-            android:text="cur" />
+            android:text="cur"
+            android:onClick="clearHistory"/>
 
     </LinearLayout>
 

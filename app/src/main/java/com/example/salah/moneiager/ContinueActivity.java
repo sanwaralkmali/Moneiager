@@ -24,21 +24,18 @@ public class ContinueActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_continue);
          b = getIntent().getExtras();
-        Toast.makeText(this,b.getString("userName"),Toast.LENGTH_SHORT).show();
-        Toast.makeText(this,b.getString("userEmail"),Toast.LENGTH_SHORT).show();
+         db = new DataBaseHelper(this);
 
-        db = new DataBaseHelper(this);
-
-        userIncome = (EditText) findViewById(R.id.UserIncome);
-        userMax = (EditText) findViewById(R.id.MaxExponses);
-        itemMax = (EditText) findViewById(R.id.ItemMax);
-        toKeep = (EditText) findViewById(R.id.ToKeep);
+         userIncome = (EditText) findViewById(R.id.UserIncome);
+         userMax = (EditText) findViewById(R.id.MaxExponses);
+         itemMax = (EditText) findViewById(R.id.ItemMax);
+         toKeep = (EditText) findViewById(R.id.ToKeep);
 
     }
     public void SubmitClick(View view) {
 
-        if(userIncome.getText().toString().equals("") || userMax.getText().toString().equals("")
-                || itemMax.getText().toString().equals("") || toKeep.getText().toString().equals("")){
+        if(userIncome.getText().toString().isEmpty() || userMax.getText().toString().isEmpty()
+                || itemMax.getText().toString().isEmpty() || toKeep.getText().toString().isEmpty()){
             Toast.makeText(this,"all feilds are required",Toast.LENGTH_SHORT).show();
             return;
         }
@@ -47,6 +44,9 @@ public class ContinueActivity extends AppCompatActivity {
         db.insertUser(b.getString("userName"),b.getString("userEmail"),
                Integer.parseInt(userIncome.getText().toString()), Integer.parseInt(userMax.getText().toString())
                 , Integer.parseInt(itemMax.getText().toString()), Integer.parseInt(toKeep.getText().toString()));
+
+        Intent intent = new Intent(ContinueActivity.this,MainActivity.class);
+        startActivity(intent);
 
         }
 

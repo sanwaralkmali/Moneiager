@@ -1,42 +1,81 @@
 package com.example.salah.moneiager;
 import android.content.Intent;
+import android.support.design.widget.FloatingActionButton;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     DataBaseHelper db ;
-    TextView tx1;
-    TextView tx2;
+    private TextView tx1;
+    private TextView tx2;
     TextView tx3;
+    FloatingActionButton faBu;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         db = new DataBaseHelper(this);
-
+        EditText description;
         List<UserInfo> l = db.getUser();
-
-        if(l.isEmpty())
-        {
-            Intent i = new Intent(this,OnCreateActivity.class);
+        if (l.isEmpty()) {
+            Intent i = new Intent(this, OnCreateActivity.class);
             startActivity(i);
 
+        } else {
+            tx1 = (TextView) findViewById(R.id.IncomeValue);
+            tx1.setText(l.get(0).getUserIncome() + "TL      100%");
+
+            tx2 = (TextView) findViewById(R.id.UsedValue);
+            tx2.setText(db.getSumPrice() + " TL       " + (100 * db.getSumPrice()) / l.get(0).getUserIncome() + "%");
+
+            tx3 = (TextView) findViewById(R.id.AvaliableValue);
+            tx3.setText(l.get(0).getUserIncome() - db.getSumPrice() + "TL     " + (100 - ((100 * db.getSumPrice()) / l.get(0).getUserIncome())) + "%");
+
+            faBu = (FloatingActionButton) findViewById(R.id.floatingActionButton);
+            faBu.setOnClickListener(new View.OnClickListener() {
+
+                @Override
+                public void onClick(View v) {
+                    AlertDialog.Builder mBuilder = new AlertDialog.Builder(MainActivity.this);
+                    View myView = getLayoutInflater().inflate(R.layout.layout_insert_item, null);
+
+                    final EditText description = (EditText) myView.findViewById(R.id.edDescription);
+                    final EditText price = (EditText) myView.findViewById(R.id.edprice);
+                    Button bu = (Button) myView.findViewById(R.id.addBut);
+
+                    bu.setOnClickListener(new View.OnClickListener() {
+
+                        @Override
+                        public void onClick(View v) {
+                            if (description.getText().toString().isEmpty() || price.getText().toString().isEmpty()) {
+                                Toast.makeText(MainActivity.this, "fill all field please", Toast.LENGTH_SHORT).show();
+                                return;
+                            }
+                            db.addItem(description.getText().toString(), Integer.parseInt(price.getText().toString()));
+
+                            List<historyModel> list = db.getAllNotes();
+
+                            Intent i = new Intent(MainActivity.this, MainActivity.class);
+                            startActivity(i);
+                        }
+                    });
+
+                    mBuilder.setView(myView);
+                    AlertDialog dialog = mBuilder.create();
+                    dialog.show();
+
+                }
+            });
+
         }
-        tx1 = (TextView)findViewById(R.id.IncomeValue);
-        tx1.setText(l.get(0).getUserIncome() + "TL      100%");
-
-        tx2 = (TextView)findViewById(R.id.UsedValue);
-        tx2.setText(db.getSumPrice() + " TL       " + (100*db.getSumPrice())/l.get(0).getUserIncome() +"%");
-
-        tx3 = (TextView)findViewById(R.id.AvaliableValue);
-        tx3.setText(l.get(0).getUserIncome()-db.getSumPrice() + "TL     " + (100-((100*db.getSumPrice())/l.get(0).getUserIncome())) +"%");
-
-
     }
 
 
@@ -46,5 +85,10 @@ public class MainActivity extends AppCompatActivity {
         startActivity(i);
         Toast.makeText(this,"History Clicked",Toast.LENGTH_SHORT).show();
 
+            }
+
+
+            public void clearHistory(View view){
+            db.deleteAll();
             }
 }

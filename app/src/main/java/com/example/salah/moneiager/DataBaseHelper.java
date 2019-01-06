@@ -13,7 +13,7 @@ import java.util.List;
 
 public class DataBaseHelper extends SQLiteOpenHelper {
     public DataBaseHelper(Context context) {
-        super(context, "moneyManager_db", null, 1);
+        super(context, "moneyManagerProject_db", null, 1);
     }
 
     @Override
@@ -32,6 +32,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
         onCreate(db);
     }
+
     public List<historyModel> getAllNotes() {
         List<historyModel> notes = new ArrayList<>();
 
@@ -47,9 +48,9 @@ public class DataBaseHelper extends SQLiteOpenHelper {
             do {
                 historyModel note = new historyModel();
                 note.setId(cursor.getInt(cursor.getColumnIndex(historyModel.COLUMN_ID)));
-                note.setNote(cursor.getString(cursor.getColumnIndex(historyModel.COLUMN_NOTE)));
+                note.setdescription(cursor.getString(cursor.getColumnIndex(historyModel.COLUMN_DESCRIPTION)));
                 note.setTimestamp(cursor.getString(cursor.getColumnIndex(historyModel.COLUMN_TIMESTAMP)));
-
+                note.setPrice(cursor.getInt(cursor.getColumnIndex(historyModel.COLUMN_PRICE)));
                 notes.add(note);
             } while (cursor.moveToNext());
         }
@@ -60,6 +61,37 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         // return notes list
         return notes;
     }
+
+    public List<historyModel> getAllNotes(String date) {
+        List<historyModel> notes = new ArrayList<>();
+
+        // Select All Query
+        String selectQuery = "SELECT  * FROM " + historyModel.TABLE_NAME +" WHERE "+ historyModel.COLUMN_TIMESTAMP +
+        " ='"+date+"' ORDER BY " +
+                historyModel.COLUMN_TIMESTAMP + " DESC";
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+
+        // looping through all rows and adding to list
+        if (cursor.moveToFirst()) {
+            do {
+                historyModel note = new historyModel();
+                note.setId(cursor.getInt(cursor.getColumnIndex(historyModel.COLUMN_ID)));
+                note.setdescription(cursor.getString(cursor.getColumnIndex(historyModel.COLUMN_DESCRIPTION)));
+                note.setTimestamp(cursor.getString(cursor.getColumnIndex(historyModel.COLUMN_TIMESTAMP)));
+                note.setPrice(cursor.getInt(cursor.getColumnIndex(historyModel.COLUMN_PRICE)));
+                notes.add(note);
+            } while (cursor.moveToNext());
+        }
+
+        // close db connection
+        db.close();
+
+        // return notes list
+        return notes;
+    }
+
     public List<UserInfo> getUser() {
         List<UserInfo> notes = new ArrayList<>();
 
@@ -92,15 +124,14 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     }
 
 
-    public long insertNote(String description, int price, String timestamp) {
+    public long addItem(String description, int price) {
         // get writable database as we want to write data
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
         // `id` and `timestamp` will be inserted automatically.
         // no need to add them
-        values.put(historyModel.COLUMN_NOTE, description);
-        values.put(historyModel.COLUMN_TIMESTAMP, timestamp);
+        values.put(historyModel.COLUMN_DESCRIPTION, description);
         values.put(historyModel.COLUMN_PRICE, price);
 
         // insert row
