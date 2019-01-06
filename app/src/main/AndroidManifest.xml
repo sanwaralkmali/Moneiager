@@ -17,7 +17,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".History" />
-        <activity android:name=".OnCreateActivity"></activity>
+        <activity android:name=".OnCreateActivity" />
+        <activity android:name=".ContinueActivity"></activity>
     </application>
 
 </manifest>

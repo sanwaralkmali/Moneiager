@@ -11,34 +11,56 @@
         android:id="@+id/linearLayout3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_weight="3"
         android:orientation="vertical"
         tools:ignore="MissingConstraints"
         tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="0dp"
-        android:layout_weight="3">
+        tools:layout_editor_absoluteY="0dp">
 
 
-    <LinearLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:orientation="horizontal"
-            android:layout_weight="1">
+            android:layout_gravity="center"
+            android:layout_marginTop="30dp">
 
 
-    <TextView
-                android:id="@+id/textView"
+            <TextView
+                android:id="@+id/Income"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
                 android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="18dp"
                 android:layout_marginEnd="8dp"
                 android:layout_marginBottom="8dp"
                 android:fontFamily="serif-monospace"
                 android:text="Income"
                 android:textSize="22dp"
                 android:textStyle="bold"
-                app:layout_constraintBottom_toTopOf="@+id/textView2"
+                app:layout_constraintBottom_toTopOf="@+id/Used"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.086"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.585" />
+
+            <TextView
+                android:id="@+id/IncomeValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="18dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
+                android:fontFamily="serif-monospace"
+                android:text=""
+                android:textSize="22dp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@+id/Used"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.086"
                 app:layout_constraintStart_toStartOf="parent"
@@ -49,11 +71,11 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/textView2"
+                android:id="@+id/Used"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
@@ -62,10 +84,26 @@
                 android:layout_marginBottom="60dp"
                 android:fontFamily="serif-monospace"
                 android:text="Used"
-                android:textColor="@color/colorPrimary"
                 android:textSize="22dp"
                 android:textStyle="bold"
-                app:layout_constraintBottom_toTopOf="@+id/textView3"
+                app:layout_constraintBottom_toTopOf="@+id/Avaliable"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.076"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <TextView
+                android:id="@+id/UsedValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="60dp"
+                android:fontFamily="serif-monospace"
+                android:text=""
+                android:textSize="22dp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@+id/Avaliable"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.076"
                 app:layout_constraintStart_toStartOf="parent" />
@@ -75,11 +113,11 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            android:orientation="horizontal">
 
-        <TextView
-                android:id="@+id/textView3"
+            <TextView
+                android:id="@+id/Avaliable"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
@@ -92,8 +130,24 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                tools:ignore="MissingConstraints"
-                />
+                tools:ignore="MissingConstraints" />
+
+            <TextView
+                android:id="@+id/AvaliableValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:fontFamily="serif-monospace"
+                android:text=""
+                android:textColor="@color/colorPrimary"
+                android:textSize="22dp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                tools:ignore="MissingConstraints" />
         </LinearLayout>
 
     </LinearLayout>
@@ -101,7 +155,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
+        android:layout_weight="2"
         android:orientation="horizontal"
         android:gravity="center"        >
 
