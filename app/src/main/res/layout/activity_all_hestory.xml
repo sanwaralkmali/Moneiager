@@ -19,6 +19,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="@string/resethistory"
+            android:background="@color/ResetButton"
             tools:ignore="ButtonStyle" />
 
         <Button
@@ -27,6 +28,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="@string/startnewsession"
+            android:background="@color/NewSession"
             tools:ignore="ButtonStyle"
             android:layout_marginBottom="10sp"/>
     </LinearLayout>

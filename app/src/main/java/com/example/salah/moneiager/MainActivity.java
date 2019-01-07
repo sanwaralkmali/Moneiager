@@ -17,6 +17,7 @@ public class MainActivity extends AppCompatActivity {
     private TextView tx2;
     TextView tx3;
     FloatingActionButton faBu;
+    List<UserInfo> l;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,7 +25,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         db = new DataBaseHelper(this);
         EditText description;
-        List<UserInfo> l = db.getUser();
+        l = db.getUser();
+
         if (l.isEmpty()) {
             Intent i = new Intent(this, OnCreateActivity.class);
             startActivity(i);
@@ -57,13 +59,10 @@ public class MainActivity extends AppCompatActivity {
                         @Override
                         public void onClick(View v) {
                             if (description.getText().toString().isEmpty() || price.getText().toString().isEmpty()) {
-                                Toast.makeText(MainActivity.this, "fill all field please", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(MainActivity.this, "fill all fields please", Toast.LENGTH_SHORT).show();
                                 return;
                             }
                             db.addItem(description.getText().toString(), Integer.parseInt(price.getText().toString()));
-
-                            List<historyModel> list = db.getAllNotes();
-                            finish();
                             startActivity(MainActivity.this.getIntent());
 
                         }
@@ -91,4 +90,20 @@ public class MainActivity extends AppCompatActivity {
                 Intent i = new Intent(MainActivity.this, AllHestory.class);
                 startActivity(i);
             }
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
+        moveTaskToBack(true);
+    }
+
+    @Override
+    public void onRestart() {
+        super.onRestart();
+        startActivity(getIntent());
+
+    }
+
+
+
 }

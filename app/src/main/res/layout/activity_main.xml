@@ -189,31 +189,26 @@
         android:layout_weight="0">
 
 
-
-    <Button
-            android:id="@+id/button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="0dp"
-            android:layout_weight="1"
-            android:text="Home" />
-
         <Button
             android:id="@+id/button2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="0dp"
             android:layout_weight="1"
+            android:textStyle="italic"
+            android:background="@color/NewSession"
             android:onClick="gotoHistory"
-            android:text="History" />
+            android:text="@string/history" />
 
         <Button
             android:id="@+id/cur"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="0dp"
-            android:layout_weight="0"
-            android:text="cur"
+            android:layout_weight="1"
+            android:background="@color/AllRecords"
+            android:textStyle="italic"
+            android:text="@string/all_records"
             android:onClick="clearHistory"/>
 
     </LinearLayout>

@@ -84,6 +84,7 @@ public class AllHestory extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         db.deleteUser();
+                        db.deleteAll();
                         startActivity(new Intent(AllHestory.this,MainActivity.class));
 
                     }
@@ -92,7 +93,6 @@ public class AllHestory extends AppCompatActivity {
                 builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-
                         dialog.cancel();
                     }
                 });

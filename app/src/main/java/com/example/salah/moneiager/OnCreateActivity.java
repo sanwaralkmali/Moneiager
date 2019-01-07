@@ -19,30 +19,26 @@ public class OnCreateActivity extends AppCompatActivity {
 
         userName = (EditText) findViewById(R.id.UserName);
         userEmail = (EditText) findViewById(R.id.UserEmail);
-
-
-
-
-
-    }
+            }
     public void ContinueClick(View view) {
         if(userName.getText().toString().equals("") || userEmail.getText().toString().equals("")){
             Toast.makeText(this,"insert UserName and Email",Toast.LENGTH_SHORT).show();
             return;
         }
         else
-        {
-
-            Intent i = new Intent(this,ContinueActivity.class);
+        {   Intent i = new Intent(this,ContinueActivity.class);
             Bundle b = new Bundle();
             b.putString("userName",userName.getText().toString());
             b.putString("userEmail",userEmail.getText().toString());
 
             i.putExtras(b);
             startActivity(i);
-
-        }
-
-
+      }   }
+   @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
+        moveTaskToBack(true);
     }
+
 }

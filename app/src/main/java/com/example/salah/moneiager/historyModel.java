@@ -12,8 +12,6 @@ public class historyModel {
     private String description;
     private String timestamp;
     private int price;
-
-
     // Create table SQL query
     public static final String CREATE_TABLE =
             "CREATE TABLE " + TABLE_NAME + "("

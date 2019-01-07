@@ -6,9 +6,11 @@
     <string name="price">price</string>
     <string name="button">Button</string>
     <string name="add">Add</string>
-    <string name="new_item">New Item</string>
+    <string name="new_item">New Record</string>
     <string name="date">Date</string>
-    <string name="resethistory">ResetHistory</string>
-    <string name="startnewsession">StartNewSession</string>
+    <string name="resethistory">Reset History</string>
+    <string name="startnewsession">New Session</string>
     <string name="avaliable">Avaliable</string>
+    <string name="all_records">All Records</string>
+    <string name="history">History</string>
 </resources>
